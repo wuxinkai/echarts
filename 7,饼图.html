@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/echarts.js"></script>
+</head>
+<body>
+<div id="main" style="height:500px"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+
+
+    option = {
+        title : {
+            text: '某站点用户访问来源',
+            subtext: '纯属虚构',  //子标签
+            x:'center'  //显示位置
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        //图例
+        legend: {
+            orient : 'vertical',
+            x : 'left',
+            data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+        },
+        //工具箱
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {
+                    show: true,
+                    type: ['pie', 'funnel'],
+                    option: {
+                        funnel: {
+                            x: '25%',
+                            width: '50%',
+                            funnelAlign: 'left',
+                            max: 1548
+                        }
+                    }
+                },
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'直接访问'},
+                    {value:310, name:'邮件营销'},
+                    {value:234, name:'联盟广告'},
+                    {value:135, name:'视频广告'},
+                    {value:1548, name:'搜索引擎'}
+                ] ,
+                itemStyle:{
+                    normal: {
+                        borderColor: 'red',
+                        borderWidth: 2,
+                        label:{ //提示文字
+                            show: true,
+                            position:'inner', //outer   文字在里面还是在外面
+                            distance:0.1 , //当label position为inner时有效，为label位置到圆心的距离与圆半径(环状图为内外半径和)的比例系数，默认为0.5。
+                        },
+                        labelLine:{ //边线
+                            show:false,
+                        }
+                    }
+                }
+            }
+        ]
+    };
+
+
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

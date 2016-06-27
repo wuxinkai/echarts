@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body style="overflow: hidden">
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:400px"></div>
+<!-- ECharts单文件引入 -->
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+    // 使用  路径必须写对
+    require(
+            [
+                '0.echarts引入',
+                '0.echarts引入/chart/bar' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main'));
+
+                var option = {
+                    //设置作用距离
+                    grid:{
+                      x1:0,  //50% 也可以用百分比
+                      x2:30, //距离右侧距离
+                      y1:0,
+                      y2:30, //距离地步的距离
+                      borderColor:"red", //边框
+                      borderWidth:5, //粗细  0就是不要边框
+                      backgroundColor:"green" //背景色
+//          控制大小,就会忽略x1，x2，y1,y2
+//                      width:'500px',
+//                      height:"200px"
+//          用百分比实现自适应
+//                        width:'70%',
+//                        height:"40%"
+                    },
+                    tooltip: {
+                        show: true
+                    },
+                    legend: {
+                        data:['销量']
+                    },
+// 横轴 x轴
+                    xAxis : [
+                        {
+                            type : 'category', //轴类型
+                         //   position:'top', //把轴定义在上面
+                         //   boundaryGap:[0, 0.5],  在 	数值型，时间型  会在一个区间设置高度
+
+                            data : ["衬衫","羊毛衫","雪纺衫",
+                                {
+                                    value:"裤衩",  //单独设置样式
+                                    textStyle:{
+                                        color : 'red',
+                                        fontSize:20,
+                                        fontWeight:'bold'
+                                    }
+                                },"裤子","高跟鞋","袜子",
+
+                            ],   //类目型 特有的，
+
+// 5条轴线
+                            axisLine:{  //  很左边的轴线
+                                show:true,  //是否显示
+                                onGap:false,
+                                lineStyle:{
+                                    color : 'darkmagenta',
+                                    typeStyle:'solid',
+                                    width:13
+                                },
+                                onZero:true,  //false是和0对齐
+                            },
+
+                            axisTick:{  //x轴上的小标记
+                                show:true,  //是否显示
+                                length:50,  //长度
+                             // onGap:false,  //坐标点是否和文字对齐，false是对齐
+                                lineStyle:{
+                                    color : 'gold',
+                                    typeStyle:'solid',
+                                    width:5,
+                                },
+                            },
+
+                            splitLine:{  //y轴图标里面的竖线，
+                                show:true,  //是否显示
+                                lineStyle:{
+                                    color : 'pink',
+                                    type:'dashed',  //虚线显示
+                                    width:1,
+                                },
+                            },
+
+                            splitArea:{  //图标里面的空白区域
+                                show:true,  //是否显示
+                                areaStyle:{
+                                    color : ['rgba(232, 120, 22, 0.84)',' rgba(63, 232, 92, 0.77)']
+                                },
+                            }
+                        }
+                    ],
+//  竖轴 y轴
+                    yAxis : [
+                        {
+                          //  max:100, //最大值
+                          //  min:10, //最小值
+                            type : 'value',
+                         //   scale:true,  //false没有脱离0值， true是脱离0值聚焦到一个范围，一般应用于股票
+
+                            //  position:'right', //把轴定义在右面
+                            splitNumber:10,  //y轴上的点被分为10段
+                            name:"命名这个轴",
+                            nameLocation:'start', //把轴放在地下，默认在上面
+                            nameTextStyle:{      //调整页面样式
+                                color:"red",
+                                fontSize:20,
+
+                            },
+                     //       boundaryGap:false,  //类目型 false不要两侧的间隙，true是留出间隙，一般折线图，要贴边，柱形图不要贴边
+                          //  show:false, //隐藏Y轴
+
+
+                        }
+                    ],
+                    series : [
+                        {
+                            "name":"销量",
+                            "type":"bar",
+                            "data":[5, 20, 40, 10, 10, 20]
+                        }
+                    ]
+                };
+
+                // 为echarts对象加载数据 
+                myChart.setOption(option);
+            }
+    );
+</script>
+</body>
+<style type="text/css">
+    a{ background: rgba(232, 120, 22, 0.84);border: 1px dashed}
+</style>

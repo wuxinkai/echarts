@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/echarts.js"></script>
+</head>
+<body>
+<div id="main" style="height:500px"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+
+
+    option = {
+        tooltip : {
+            trigger: 'axis',
+            showDelay : 0,  //显示延迟，添加显示延迟可以避免频繁切换，特别是在详情内容需要异步获取的场景，
+            axisPointer:{
+                show: true,
+                type : 'cross',
+                lineStyle: {
+                    type : 'dashed',
+                    width : 1
+                }
+            }
+        },
+        legend: {
+            data:['scatter1','scatter2']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataZoom : {show: true},
+                dataView : {show: true, readOnly: false},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        xAxis : [
+            {
+                type : 'value',
+                splitNumber: 4,
+                scale: true
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                splitNumber: 4,
+                scale: true
+            }
+        ],
+        series : [
+            {
+                name:'scatter1',
+                type:'scatter',
+
+                //主要介绍symbolSize的应用
+                symbolSize:function(value){
+                    return value[2]
+                },
+               // large:false, //启动大规模散点图
+               // largeThreshold:2000, // 	大规模散点图自动切换阀值，large为true下有效
+                data:[
+                    {value: [6,12,40],symbolSize:100,},
+                    [5,6,30],
+                    [15,16,30]
+                ],
+            },
+        ]
+    };
+
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

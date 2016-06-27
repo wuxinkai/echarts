@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/echarts.js"></script>
+</head>
+<body>
+<div id="main" style="height:500px"></div>
+</body>
+</html>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        //辩题
+        title : {
+            text: '某站点用户访问来源',
+            subtext: '纯属虚构',
+            x:'center'
+        },
+        //提示
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        //图例;
+        legend: {
+            show:true,
+           // selectedMode:'multiple',  初始化直接，单个出现，
+            selected:{'邮件营销':false}, //直接隐藏降水量，
+            orient : 'horizontal', //vertical垂直显示，
+            x : 'left',
+//            formatter:function(name){
+//                var data=this.getSeries()[0].data;
+//                var total =0;
+//                var tarValue;
+//                for(var i= 0,i=data.length;i<1;i++){
+//                 total+=data[i].value;
+//                    if(data[i].name==name){
+//                        tarValue=data[i].value
+//                    }
+//                }
+//                var p=(tarValue/total*100).toFixed(2)
+//                return name+''+p+'%';
+//            },
+
+            data:['直接访问','邮件营销','','联盟广告','视频广告','搜索引擎'],  //用空格；来实现手动换行
+
+        },
+        //toolbox 工具箱
+        toolbox: {
+            show : true,
+            feature : {  //feature;特征
+                mark : {show: true, //mark 标记 ,辅助线标志
+
+                }, //
+                dataView : {show: true, readOnly: false}, //readOnly只读，dataView；数据视图
+                magicType : {  //动态类型切换
+                    show: true,
+                    type: ['pie', 'funnel'],
+                    option: {
+                        funnel: {
+                            x: '25%',
+                            width: '50%',
+                            funnelAlign: 'left',
+                            max: 1548
+                        }
+                    }
+                },
+                dataZoom:{}, //框选区域缩放
+                restore : {show: true},  //restore，还原，复位原始图表，
+                saveAsImage : {show: true}  // saveAsImage，保存图片
+            }
+        },
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'直接访问'},
+                    {value:310, name:'邮件营销'},
+                    {value:234, name:'联盟广告'},
+                    {value:135, name:'视频广告'},
+                    {value:1548, name:'搜索引擎'}
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:400px;border: 1px solid red"></div>
+<!-- ECharts单文件引入 -->
+<script src="js/echarts.js"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var option = {
+        //设置作用距离
+        grid:{
+//            x:0,  //50% 也可以用百分比
+//            y:0, //距离右侧距离
+//            y1:0,
+//            y2:0, //距离底部的距离
+            borderColor:"red", //边框
+            containLabel:true, //解决文字不能全部显示问题
+            borderWidth:5, //粗细  0就是不要边框
+            backgroundColor:"green" //背景色
+//          控制大小,就会忽略x1，x2，y1,y2
+//                      width:'500px',
+//                      height:"200px"
+//          用百分比实现自适应
+//                        width:'70%',
+//                        height:"40%"
+        },
+        tooltip: {
+            show: true
+        },
+        legend: {
+            data:['销量']
+        },
+// 横轴 x轴
+        xAxis : [
+            {
+                type : 'category', //轴类型
+                //   position:'top', //把轴定义在上面
+                //   boundaryGap:[0, 0.5],  在 	数值型，时间型  会在一个区间设置高度
+                boundaryGap:true, //这里是true，axisTick的onGap默认也是true，
+                data : ["衬衫","羊毛衫","雪纺衫",
+                    {
+                        value:"裤衩",  //单独设置样式
+                        textStyle:{
+                            color : 'red',
+                            fontSize:20,
+                            fontWeight:'bold'
+                        }
+                    },"裤子","高跟鞋","袜子",
+
+                ],   //类目型 特有的，
+
+// 5条轴线
+
+                axisLabel:{  //（3）坐标轴文本标签选项
+                    show:true,
+                    interval:'auto', //当文字内容放不下的时候会自定隐藏
+                  //  interval:0, //是全部显示没有间隔，2 是间隔2个显示，
+                    rotate:45,
+                    margin:28,
+                    clickable:true,  //轴上的内容是否可以点击
+                   // formatter:"{value}月", value是传入的月份，data数据，
+                    formatter:function(v){  //当做模板使用，
+                        return "大"+v
+                    },
+                    textStyle:{
+                        fontSize:16 ,
+                        fontWeight:'bold',
+                        color : 'blue',
+                    }
+                },
+
+                axisLine:{  //  很左边的轴线  。（1）坐标轴线
+                    show:true,  //是否显示
+                   // onGap:true,  //
+                    lineStyle:{
+                        color : 'darkmagenta',
+                        typeStyle:'solid',
+                        width:13
+                    },
+                    onZero:true,  //false是和0对齐    	定位到垂直方向的0值坐标上
+                },
+
+                axisTick:{  //x轴上的小标记    （2）坐标轴小标记
+                    show:true,  //是否显示
+                    length:50,  //长度
+                    onGap:true,  //他先去寻找boundaryGap，  坐标点是否和文字对齐，false是对齐  。小标记是否显示为间隔
+                    lineStyle:{
+                        color : 'gold',
+                        typeStyle:'solid',
+                        width:5,
+                    },
+                    inside:false, //小标记是否显示为在grid内部，默认在外部
+                },
+
+                splitLine:{  //y轴图标里面的竖线，  （4）分隔线
+                    show:true,  //是否显示
+                    lineStyle:{
+                        color : 'pink',
+                        type:'dashed',  //虚线显示
+                        width:1,
+                    },
+                },
+
+                splitArea:{  //图标里面的空白区域  （5）分隔区域
+                    show:true,  //是否显示
+                    areaStyle:{
+                        //颜色可以支持数组
+                        color : ['rgba(232, 120, 22, 0.84)',' rgba(63, 232, 92, 0.77)','red']
+                    },
+                }
+
+            }
+        ],
+//  竖轴 y轴
+        yAxis : [
+            {
+                //  max:100, //最大值
+                //  min:10, //最小值
+                type : 'value',
+                //   scale:true,  //false没有脱离0值， true是脱离0值聚焦到一个范围，一般应用于股票
+
+                //  position:'right', //把轴定义在右面
+                splitNumber:10,  //y轴上的点被分为10段
+                name:"命名这个轴",
+                nameLocation:'start', //把轴放在地下，默认在上面
+                nameTextStyle:{      //调整页面样式
+                    color:"red",
+                    fontSize:20,
+
+                },
+                //       boundaryGap:false,  //类目型 false不要两侧的间隙，true是留出间隙，一般折线图，要贴边，柱形图不要贴边
+                //  show:false, //隐藏Y轴
+
+
+            }
+        ],
+        //存放数据
+        series : [   //处方数据的地方，
+            {
+                "name":"销量",
+                "type":"bar",  //什么类型图，
+                "data":[5, 20, 40, 10, 10, 20]
+            }
+        ]
+    };
+
+    // 为echarts对象加载数据
+    myChart.setOption(option);
+</script>
+</body>

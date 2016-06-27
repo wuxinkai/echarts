@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/echarts.js"></script>
+</head>
+<body>
+<div id="main" style="height:500px"></div>
+</body>
+</html>
+<script type="text/javascript">
+    //和折线图公用部分一样，
+    //tooltip
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        title : {
+            text: '某地区蒸发量和降水量',
+            subtext: '纯属虚构'
+        },
+        //tooltip可以有好多级的
+
+        tooltip : {
+            show:true,  //线消失，
+            showContent:true, //线有但是文本框提示信息没了
+            trigger: 'axis', //触发类型 可选为：'item' | 'axis'
+            backgroundColor:'pink', //背景色
+            borderColor:'#333', // 	提示边框颜色
+            borderRadius:4,  //提示边框圆角
+            borderWidth:2,  //提示边框线宽
+            padding:5,  //提示内边距
+            position:[0,0], //定位提示框的位置
+            showDelay:0, //花过后延迟效果， 0是不延迟，默认是20
+            hideDelay:1000, //1秒后才消失
+            transitionDuration:0, //动画
+            formatter:'{a}:{b}:{c}\n{a1}{b1}{c1}', // 展示两个系列的内容
+            textStyle:{
+                color:'#fff'
+            },
+            axisPointer:{  //轴指针
+                type: 'line',  //这里是line用的就是lineStyle，cross就是crossStyle，shadow就是shadowStyle
+                lineStyle: {
+                    color: '#48b',
+                    width: 2,
+                    type: 'dashed'
+                },
+                crossStyle: {  //cross交叉
+                    color: '#1e90ff',
+                    width: 1,
+                    type: 'dashed'
+                },
+                shadowStyle: {
+                    color: 'rgba(150,150,150,0.3)',
+                    width: 'auto',
+                    type: 'default'
+                }
+            }
+        },
+        legend: {
+            data:['蒸发量','降水量']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,  //calculable 可信赖的 看给了薄   是否启用拖拽重计算特性，默认关闭
+        xAxis : [
+            {
+                type : 'category',
+                data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+            }
+        ],
+        //如果实现横纵互换，yAxis轴换成xAxis轴
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+
+        series : [  //驱动图表生成的数据内容数组
+            {
+                name:'蒸发量',
+                type:'bar',
+// 柱型图特点，
+                itemStyle:{
+                    normal: {  //默认样式
+                        barBorderWidth:3,  //3px的边框
+                        barBorderColor:'#000', //边框颜色
+                        barBorderRadius:10, //把柱子设置成圆角
+                     },
+                },
+                barGap:'30%' , //柱子和柱子的间距，默认是30% ，支持负数，两个柱子跌在一起，
+                barCategoryGap:'20%', //类目间柱形距离 默认为类目间距的20%，
+                barWidth:10,  //柱子的粗细
+                barMaxWidth:50, //在数据比较少的情况下，柱子会非常宽，我们可以设置最大宽度
+                barMinHeight:50, //数值非常小，会看不清，所以设置最小高度，
+
+                data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'降水量',
+                type:'bar',
+                data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                markPoint : {
+                    data : [
+                        {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
+                        {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>
+<style type="text/css">
+    h{background: darkmagenta }
+</style>
