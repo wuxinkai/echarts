@@ -3,7 +3,10 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="js/echarts-all.js"></script>
+    <style>
+
+    </style>
 </head>
 <body>
 <div id="main" style="height:500px"></div>
@@ -11,7 +14,8 @@
     var myChart = echarts.init(document.getElementById('main'));
     option = {
         title : {
-            text: '2013年上半年上证指数'
+            text: '2013年上半年上证指数',
+
         },
         tooltip : {
             trigger: 'axis',
@@ -27,13 +31,68 @@
         },
         toolbox: {
             show : true,
+            x:'right',
+            y:'top',
+            color:'red' , //
+            itemSize:20,//大小
+            itemGap:10,//间隙
+            backgroundColor:'rgba(192, 206, 24, 0.6)', //背景色
+            borderColor:'#000', //颜色
+            borderWidth:2, //边框粗细
+            padding:10, //工具箱内边距
+            disableColor:'blue',//禁用颜色定义
+            effectiveColor:'red',//生效颜色定义
+            showTitle:true, //是否显示工具箱文字提示
+
             feature : {
-                mark : {show: true},
-                dataZoom : {show: true},
-                dataView : {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore : {show: true},
-                saveAsImage : {show: true}
+                mark : {
+                    title : {
+                        mark : '辅助线开关',
+                        markUndo : '删除辅助线',
+                        markClear : '清空辅助线'
+                    },
+                    lineStyle : {
+                        width : 2,
+                        color : '#1e90ff',
+                        type : 'dashed'
+                    }
+                },//辅助线开关
+            //s数据缩放
+                dataZoom : {
+                    show: true,
+                    title : {
+                        dataZoom : '区域缩放',
+                        dataZoomReset : '区域缩放后退'
+                    }
+                },
+                //数据视图
+                dataView : {
+                    show : false,
+                    title : '数据视图',
+                    readOnly: false, //不让用户编辑，
+                    lang: ['数据视图', '关闭', '刷新'] //
+                },
+                //动态类型切换
+                magicType: {
+                    show: true,
+                    type: ['line', 'bar'],
+                    option: {} //动态类型加入时候可以修改内容的
+                },
+                //还原
+                restore : {
+                    show: true,
+                    onclick:function(){
+                        alert(1)
+                    }
+                },
+                //保存图片
+                saveAsImage : {
+                    show: true,
+//                    title : '保存为图片',
+//                    type : 'png',  //jpg
+                  //  icon:'image//../',  //可以引入图片
+//                    lang : ['点击保存'],
+                }
             }
         },
         dataZoom : {

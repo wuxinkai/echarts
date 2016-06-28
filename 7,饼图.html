@@ -52,10 +52,16 @@
         calculable : true,
         series : [
             {
+                //饼图独有的
+                center: ['50%', '60%'],  // 	圆心坐标，支持绝对值（px）和百分比，百分比计算min(width, height) * 50%    ,可以定义位置
                 name:'访问来源',
                 type:'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
+                radius : '55%', //圆的大小，  半径，支持绝对值（px）和百分比，百分比计算比，min(width, height) / 2 * 75%， 传数组实现环形图，[内半径，外半径]
+                // radius : ['20%','55%'],  //把饼图变成圆环图
+                startAngle:90, //开始角度，默认失败90度
+              //  clockWise:false, //把顺时针改成逆时针
+                selectedMode:'single',//选中模式，默认关闭，可选single，multiple
+                selectedOffset:50,//选中是扇区偏移量
                 data:[
                     {value:335, name:'直接访问'},
                     {value:310, name:'邮件营销'},
