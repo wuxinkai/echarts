@@ -102,7 +102,7 @@
                 smooth:true,  //是否应用平滑曲线，默认是没有平滑曲线的 ，平滑不支持虚线
                 dataFilter:'nearst',  //ECharts 会在折线图的数据数量大于实际显示的像素宽度（高度）的时候会启用优化，对显示在一个像素宽度内的数据做筛选，该选项是指明数据筛选的策略。可选 'nearest', 'min', 'max', 'average'。或者是使用自定义的筛选函数
                 legendHoverLink:true, //图标和图例做联动的响应，false就是不响应    	是否启用图例（legend）hover时的联动响应（高亮显示）
-                data:[11, 11, '', 13, 12,{
+                data:[11, 11, '', 13, 19,{
                     value:'13',
                     symbolSize:20, //单个的大小
                     symbol:'emptyCircle',  //单独设置摸一个的样式  'circle' | 'rectangle' | 'triangle' | 'diamond' |'emptyCircle' | 'emptyRectangle' | 'emptyTriangle' | 'emptyDiamond'
@@ -145,6 +145,7 @@
 //                    }
             }
                 },
+                //数据标注
                 markPoint : {  //标记点  系列中的数据标注内容
                     data : [
                         {type : 'max', name: '最大值'},
