@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/echarts.js"></script>
+</head>
+<body>
+<div id="main" style="height:500px"></div>
+</body>
+</html>
+<script type="text/javascript">
+
+    var myChart = echarts.init(document.getElementById('main'),'infographic');
+
+
+    option = {
+        title : {
+            text: '未来一周气温变化',
+            subtext: '纯属虚构'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['最高气温','最低气温']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : ['周一','周二','周三','周四','周五','周六','周日']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLabel : {
+                    formatter: '{value} °C'
+                }
+            }
+        ],
+        series : [
+            {
+                name:'最高气温',
+                type:'line',
+                data:[11, 11, 15, 13, 12, 13, 10],
+
+
+
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'},
+
+                    ],
+                    clickable:false,
+                    symbol:'circle', // 'circle' | 'rectangle' | 'triangle' | 'diamond' |'emptyCircle' | 'emptyRectangle' | 'emptyTriangle' | 'emptyDiamond'
+                    symbolSize:40,  //大小
+                    symbolRotate:50, //旋转角度
+                    large:false,//是否启动大规模标注模式
+
+                    itemStyle: {
+                        normal: {
+                            color: 'blue',
+                           label:{
+                               formatter:'自由文本',
+                               textStyle:{
+                                   color:'red',
+                                   fontSize:30,
+                                   align:'left',
+                                   baseline:'bottom'
+                               }
+                           }
+                        },
+                        emphasis: {
+                            color: 'pink',
+                        },
+                    },
+                    effect: {
+                            show: true,
+                            type: 'scale',
+                            loop: true,
+                            period: 15,
+                            scaleSize : 2,
+                            bounceDistance: 10,
+                            color : null,
+                            shadowColor : null,
+                            shadowBlur : 0
+                    },
+
+                 },
+                //取平均数的虚线
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'最低气温',
+                type:'line',
+                data:[1, -2, 2, 5, 3, 2, 0],
+                markPoint : {
+                    data : [
+                        {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+
+    myChart.setOption(option);
+</script>
