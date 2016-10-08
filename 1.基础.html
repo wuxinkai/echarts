@@ -142,10 +142,21 @@
         ],
         //存放数据
         series : [   //处方数据的地方，
+
             {
                 "name":"销量",
                 "type":"bar",  //什么类型图，
-                "data":[5, 20, 40, 10, 10, 20]
+               "data":[5, 20, 40, 10, 10, 20],
+                "itemStyle":{
+                    normal: {
+                        color: function (params) {
+                            var colorList = [
+                                '#C1232B', '#B5C334', '#FCCE10', '#E87C25', '#27727B', '#FE8463'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                    }
+                }
             }
         ]
     };

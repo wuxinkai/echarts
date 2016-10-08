@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/echarts.js"></script>
+    <style type="text/css">
+        #report_box{ width: 1000px; height: 500px;margin: 100px auto}
+    </style>
+</head>
+<body>
+    <div id="report_box"></div>
+</body>
+</html>
+<script type="text/javascript">
+
+    var myChart = echarts.init(document.getElementById('report_box'));
+
+    option = {
+        title : {
+            text: '某地区蒸发量和降水量',  //标题
+            subtext: '纯属虚构'           // 副标题
+        },
+        tooltip : {  //提示信息
+            trigger: 'axis'  //
+        },
+        legend: { //和name关联，头部标注信息
+            data:['蒸发量','降水量']
+        },
+        toolbox: {  //工具箱，
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},  //数据窗
+                magicType : {show: true, type: ['line', 'bar']},  //魔术师
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+
+            {
+            //    position: 	'top' ,  //图标内容跑到顶部
+                name:"x轴顶你内容",
+                nameLocation:'start',   //默认在左边的name跑到了右面
+                nameTextStyle:{         //设置name的样式
+                    color:"red",
+                    fontSize:14
+                },
+                boundaryGap:true,  //内容不会超出边线，是否要顶头的意思，true不顶投
+
+                type : 'category',
+                data : ['1月','2月','3月','4月','5月','6月',
+
+                    {
+                        value:'7月',
+                        textStyle:{
+                            color : 'red',
+                            fontSize:20,
+                         }
+                    },'8月','9月','10月','11月','12月'],
+
+            }
+        ],
+        yAxis : [
+            {
+             //   position: 	'right' ,  //图标内容跑到顶部
+                name:"y轴顶部内容",
+                nameLocation:'end',  //默认是end，name的内容不会改变
+                nameTextStyle:{
+                    color:"green",
+                    fontSize:14
+                },
+                min:"1",        //时间性  数值型可以用
+                max:"300",
+                // scale:true,   脱离0值
+                splitNumber:"10",  //分割线， 有多少条分割线 默认是null
+                // logLabelBase:
+                // logPositive:
+                type : 'value',  //轴类型，默认是category
+                //轴宽度
+                axisLine: {
+                    show:true,  //显示或者隐藏
+                    lineStyle:{
+                        color: '#48b',
+                        width: 8,
+                        type: 'solid'
+                    }
+                },
+                //刻度尺的样式
+                axisTick :{
+                    show:true,
+                    interval:'auto',
+                    inside:false, //小标记的位置在线的前面还是后面，
+                    length:36,  //小标记的长度
+                    lineStyle:{
+                        color: 'red',
+                        width: 5
+                    }
+                },
+                // 轴上的内容
+                axisLabel:{
+                    show: true,  //内容文字是否隐藏
+                    interval:"auto",
+                    rotate:45,  //文字旋转多少度
+                    margin:30,   //距离坐标轴的距离
+                    clickable:false, //文字是否可点击
+                    textStyle:{
+                        color:"red",
+                        fontSize:20
+                    }
+                },
+                //表格里的线
+                splitLine:{
+                    show: true,
+                    lineStyle:{
+                        color: ['dodgerblue'],
+                        width: 1,
+                        type: 'dashed'
+                    }
+                },
+                //表格背景色
+                splitArea:{
+                    show:true,
+                    areaStyle:{
+                        color: [
+                            'rgba(230, 124, 0, 0.22)',
+                            'rgba(17, 253, 72, 0.61)'
+                        ]
+                    }
+                }
+            }
+        ],
+
+
+        series : [
+            {
+                name:'蒸发量',
+                type:'bar',
+                data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'降水量',
+                type:'bar',
+                data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                markPoint : {
+                    data : [
+                        {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
+                        {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>
+<style type="text/css">
+
+</style>

@@ -1,0 +1,8 @@
+@charset "utf-8";
+/* CSS Document */
+.lineBox { position: relative; }
+.popUp { position: absolute; right:0.53rem; top:0.1rem; z-index: 3; width: 100%; }
+.puTit { position: absolute; right:0; top: 0.15rem; width:2rem; font-size: 14px; color: #FA6B53; z-index: 5; }
+.puBox { width: 100%; display: none; position: absolute; left: 0; top: 0; }
+.pubCon { position: absolute; right: 0rem; top:0.6rem; z-index: 5; width:4.493333rem; height: 3.066667rem; background: url(../img/tc.png); background-size:4.493333rem; padding: 0.5rem 0.5rem 0; box-sizing:border-box; }
+.grayBg { position: fixed; left: 0; top: 0; width: 100%;}

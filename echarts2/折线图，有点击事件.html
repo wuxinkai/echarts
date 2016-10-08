@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="flexible" content="initial-dpr=1" />
+    <script src="js/flexible_css.js"></script>
+    <script src="js/flexible.js"></script>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+<div class="lineBox">
+    <!-- 开始 -->
+    <div id="report_box"></div>
+    <!-- 结束 -->
+
+<!--/*点击按钮事件*/-->
+    <div class="popUp">
+        <h3 class="puTit">这里可以点击</h3>
+        <div class="puBox">
+            <!-- 遮罩层-->
+            <div class="grayBg" style="background: #000;opacity: 0.3"></div>
+            <!-- 内容层-->
+            <div class="pubCon">22</div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+<script type="text/javascript">
+var pagewidth = $(window).width();
+var pageheight = $(window).height();
+
+$("#report_box").height(pageheight);
+$("#report_box").width(pagewidth);
+
+$('.lineBox').width(pagewidth);
+$(".grayBg").height(pageheight);
+
+//（1）折现报表实现代码，把代码插入myChart
+var myChart = echarts.init(document.getElementById('report_box'));
+//（2）代码初始化
+option = {
+    title : {
+        text: '近七日年化收益率（%）',
+        textStyle: {
+            fontSize: 17,
+            fontWeight: 'normal',
+            // 主标题文字颜色
+            color: '#5c5c5c'
+        },
+        subtext:'开始计息日：2016-05-11',
+        subtextStyle:{
+            color:'#FA6B53'
+        }
+    },
+    tooltip : {
+
+        trigger: 'item',
+        position:'top',
+        //position: ['50%', '50%'],
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            //type : 'cross',        // 默认为直线，可选为：'line' | 'shadow(区域)'
+            lineStyle:{
+                color:'#b1aeae'//调整颜色
+            }
+        },
+        //显示内容
+        formatter: '{c}%',
+        backgroundColor: 'rgba(255,97,70,0.9)',
+        borderRadius: 6
+    },
+    legend: {
+    },
+
+    //切换（折线--柱形.....）
+    toolbox: {
+        show : false,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : [1,2,3,4,5,6,7],
+            //分隔区域(背景)
+            splitArea: {
+                show: true,
+            },
+            splitLine: {//分割区域线
+                lineStyle: {
+                    color: ['#d2d2d2']
+                }
+            },
+            axisLine: {
+                // 属性lineStyle控制线条样式(坐标轴线)
+                lineStyle: {
+                    width: 0
+                }
+            },
+            // 坐标轴小标记
+            axisTick: {
+                lineStyle: {
+                    color: '#d2d2d2'
+                }
+            },
+            // 坐标轴文本标签，详见axis.axisLabel
+            axisLabel: {
+                interval:0, //全部显示
+//                        rotate: 45, //倾斜角
+//                        margin:2,   //不晓得
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                textStyle: {
+                    color: '#5c5c5c',
+                    fontSize:'10'
+                }
+            }
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            boundaryGap:true,
+            min:'dataMin',
+            splitLine: {
+                lineStyle: {
+                    color: ['#d2d2d2']
+                }
+            },
+            axisLine: {
+                // 属性lineStyle控制线条样式
+                lineStyle: {
+                    width: 0
+                }
+            },
+            // 坐标轴小标记
+            axisTick: {
+                lineStyle: {
+                    color: '#d2d2d2'
+                }
+            },
+            // 坐标轴文本标签，详见axis.axisLabel
+            axisLabel: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                textStyle: {
+                    color: '#5c5c5c',
+                    fontSize:'10'
+                }
+            },
+            boundaryGap: [0.01, 0.01]
+        }
+    ],
+    series : [
+        {
+            name:'',
+            type:'line',
+            //是否为平滑曲线显示
+            // smooth:true,
+            symbol: 'circle',
+            //当前点symbol大小，默认随轴上symbol大小
+            symbolSize: 14,
+            itemStyle: {
+                normal: {
+                    //areaStyle: {type: 'default'}
+                    //当前点symbol颜色，默认为随当前点颜色，可指定具体颜色，如无则为’#1e90ff’
+                    color:'#b1aeae',
+                    //当前点symbol边线颜色
+                    borderColor:'#fff',
+                    //当前点symbol边线宽度
+                    borderWidth:'2',
+                }
+            },
+            // 时间轴
+            lineStyle: {
+                normal: {
+                    width: 7,
+                    //color: '#ff4646'
+                    //渐变色
+                    color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                        offset: 0,
+                        color: '#ff9946'
+                    }, {
+                        offset: 1,
+                        color: '#ff4646'
+                    }])
+                }
+            },
+            data:[10.5, 10.2, 10.4, 10.8, 10.2, 10, 11],
+            markPoint: {
+                symbol:'roundRect',
+                symbolSize:[38, 32],
+                symbolOffset:[0, '-87%'],
+                label:{
+                        show:false,
+
+                },
+                itemStyle:{
+                    normal:{
+                        color:'rgba(255,97,70,0.9)'
+
+                    },
+                    emphasis:{
+                        opacity:0                    }
+                },
+                data: [
+                    {
+                        coord: [6, 11]
+                    }
+                ]
+            }
+
+        }
+    ]
+};
+myChart.setOption(option);
+// function dispatchAction(name){  
+//     myChart.dispatchAction({
+//         type: 'showTip',
+//         // 屏幕上的 x 坐标
+//         x: 6,
+//         // 屏幕上的 y 坐标
+//         y: 71,
+//         name:name
+//     });                                   
+// }  
+</script>
+<script type="text/javascript">
+    /*点击按钮事件*/
+    $(function(){
+        $('.puTit').click(function(){
+            $('.puBox').stop().fadeToggle();
+        });
+        $('.grayBg').click(function(){
+            $('.puBox').fadeOut();
+        });
+    })
+</script>
+</body>
+</html>
