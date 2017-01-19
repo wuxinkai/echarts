@@ -30,10 +30,12 @@
 //                        width:'70%',
 //                        height:"40%"
         },
-        tooltip: {
+//
+        tooltip: {  //提示框，鼠标悬浮交互时的信息提示。
             show: true
         },
-        legend: {
+//
+        legend: {  //图例，每个图表最多仅有一个图例
             data:['销量']
         },
 // 横轴 x轴
@@ -41,7 +43,7 @@
             {
                 type : 'category', //轴类型
                 //   position:'top', //把轴定义在上面
-                //   boundaryGap:[0, 0.5],  在 	数值型，时间型  会在一个区间设置高度
+                //   boundaryGap:[0, 0.5],  //在 	数值型，时间型  会在一个区间设置高度
                 boundaryGap:true, //这里是true，axisTick的onGap默认也是true，
                 data : ["衬衫","羊毛衫","雪纺衫",
                     {
@@ -64,7 +66,7 @@
                     rotate:45,
                     margin:28,
                     clickable:true,  //轴上的内容是否可以点击
-                   // formatter:"{value}月", value是传入的月份，data数据，
+                   // formatter:"{value}月", //value是传入的月份，data数据，
                     formatter:function(v){  //当做模板使用，
                         return "大"+v
                     },
@@ -75,7 +77,7 @@
                     }
                 },
 
-                axisLine:{  //  很左边的轴线  。（1）坐标轴线
+                axisLine:{  //  底部紫色的轴线  。（1）坐标轴线
                     show:true,  //是否显示
                    // onGap:true,  //
                     lineStyle:{
@@ -98,7 +100,7 @@
                     inside:false, //小标记是否显示为在grid内部，默认在外部
                 },
 
-                splitLine:{  //y轴图标里面的竖线，  （4）分隔线
+                splitLine:{  //y轴柱子与柱子的图标里面的竖线，  （4）分隔线
                     show:true,  //是否显示
                     lineStyle:{
                         color : 'pink',
@@ -120,7 +122,7 @@
 //  竖轴 y轴
         yAxis : [
             {
-                //  max:100, //最大值
+                //  max:100, // 设置刻度 最大值
                 //  min:10, //最小值
                 type : 'value',
                 //   scale:true,  //false没有脱离0值， true是脱离0值聚焦到一个范围，一般应用于股票

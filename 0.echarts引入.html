@@ -19,8 +19,8 @@
     // 使用  路径必须写对
     require(
             [
-                '0.echarts引入',
-                '0.echarts引入/chart/bar' // 使用柱状图就加载bar模块，按需加载
+                'echarts',
+                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
             ],
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
@@ -35,7 +35,7 @@
                       y2:30, //距离地步的距离
                       borderColor:"red", //边框
                       borderWidth:5, //粗细  0就是不要边框
-                      backgroundColor:"green" //背景色
+                      backgroundColor:"green", //背景色
 //          控制大小,就会忽略x1，x2，y1,y2
 //                      width:'500px',
 //                      height:"200px"
@@ -43,16 +43,18 @@
 //                        width:'70%',
 //                        height:"40%"
                     },
+
                     tooltip: {
                         show: true
                     },
+
                     legend: {
                         data:['销量']
                     },
 // 横轴 x轴
                     xAxis : [
                         {
-                            type : 'category', //轴类型
+                            type : 'category', //轴类型  	坐标轴类型，横轴默认为类目型'category'，纵轴默认为数值型'value'
                          //   position:'top', //把轴定义在上面
                          //   boundaryGap:[0, 0.5],  在 	数值型，时间型  会在一个区间设置高度
 
@@ -96,13 +98,14 @@
                                 lineStyle:{
                                     color : 'pink',
                                     type:'dashed',  //虚线显示
-                                    width:1,
+                                    width:5,
                                 },
                             },
 
                             splitArea:{  //图标里面的空白区域
                                 show:true,  //是否显示
                                 areaStyle:{
+//注释
                                     color : ['rgba(232, 120, 22, 0.84)',' rgba(63, 232, 92, 0.77)']
                                 },
                             }

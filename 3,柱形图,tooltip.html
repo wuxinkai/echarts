@@ -59,14 +59,15 @@
         legend: {
             data:['蒸发量','降水量']
         },
+//        工具箱
         toolbox: {
             show : true,
             feature : {
-                mark : {show: true},
-                dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar']},
-                restore : {show: true},
-                saveAsImage : {show: true}
+                mark : {show: true}, //辅助线开关
+                dataView : {show: true, readOnly: false}, //数据视图
+                magicType : {show: true, type: ['line', 'bar']}, // 柱形图 和饼图切换
+                restore : {show: true},  //还原，复位原始图表
+                saveAsImage : {show: true}  //保存图片 （IE8-不支持）
             }
         },
         calculable : true,  //calculable 可信赖的 看给了薄   是否启用拖拽重计算特性，默认关闭
@@ -102,12 +103,15 @@
                 barMinHeight:50, //数值非常小，会看不清，所以设置最小高度，
 
                 data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+
+//                标注  气泡
                 markPoint : {
                     data : [
                         {type : 'max', name: '最大值'},
                         {type : 'min', name: '最小值'}
                     ]
                 },
+//                标线
                 markLine : {
                     data : [
                         {type : 'average', name: '平均值'}
@@ -124,6 +128,7 @@
                         {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
                     ]
                 },
+//                y周
                 markLine : {
                     data : [
                         {type : 'average', name : '平均值'}

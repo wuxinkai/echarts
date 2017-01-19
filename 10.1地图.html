@@ -13,20 +13,23 @@
 
 
     option = {
+//       标题
         title : {
             text: 'iphone销量',
             subtext: '纯属虚构',
             x:'center'
         },
+//        气泡
         tooltip : {
             trigger: 'item'
         },
+//        图例
         legend: {
             orient: 'vertical',
             x:'left',
             data:['iphone3','iphone4','iphone5']
         },
-        //值域选择，每个图表最多仅有一个值域控件
+//值域选择，每个图表最多仅有一个值域控件
         dataRange: {
             show: true,
             orient:'vertical', // 	布局方式，默认为垂直布局，可选为：'horizontal' | 'vertical'
@@ -52,6 +55,7 @@
                 else if (v > 1000) { return '高于' + v}
                 else { return '中' }
             },
+//文字 样式
             textStyle:{
                 color: 'red',
                 decoration:'none', //修饰，仅对tooltip.textStyle生效
@@ -66,11 +70,12 @@
 
 
         },
+// 工具箱
         toolbox: {
             show: true,
             orient : 'vertical',
             x: 'right',
-            y: 'center',
+            y: 'bottom',
             feature : {
                 mark : {show: true},
                 dataView : {show: true, readOnly: false},
@@ -78,7 +83,7 @@
                 saveAsImage : {show: true}
             }
         },
-        //漫游缩放
+//漫游缩放
         roamController: {
             show: true, //显示策略
             x: 'right', //水平安放位置
@@ -103,7 +108,9 @@
                 mapType: 'china',
                 roam: false,
                 itemStyle:{
-                    normal:{label:{show:true}},
+                    normal:{label:{
+                        show:true}
+                    },
                     emphasis:{label:{show:true}}
                 },
                 data:[
@@ -176,7 +183,7 @@
             {
                 name: 'iphone5',
                 type: 'map',
-                mapType: 'china',
+                mapType: 'china',  //	地图类型，支持world，china及全国34个省市自治区。省市自治区的mapType直接使用简体中文：
                 itemStyle:{
                     normal:{label:{show:true}},
                     emphasis:{label:{show:true}}
