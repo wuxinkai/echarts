@@ -32,7 +32,7 @@
 //值域选择，每个图表最多仅有一个值域控件
         dataRange: {
             show: true,
-            orient:'vertical', // 	布局方式，默认为垂直布局，可选为：'horizontal' | 'vertical'
+//            orient:'vertical', // 	布局方式，默认为垂直布局，可选为：'horizontal' | 'vertical'
             min: 0, //指定的最小值
             max: 2500,
             x: 'left',  //九宫格布局
@@ -45,27 +45,27 @@
 //            padding:5,
 //            itemWidth:20,//值域控件图形宽度
 //            itemHeight:14,//值域控件图形高度
-            splitNumber:10, //分割多少分， calculable为true是默认均分100份 不起作用 所以要观点
-            selectedMode:false, //选择模式，默认开启值域开关，可选single，multiple
-            hoverLink:false, // 	是否启用地图hover时的联动响应（详情披露）
+//            splitNumber:10, //分割多少分， calculable为true是默认均分100份 不起作用 所以要观点
+//            selectedMode:false, //选择模式，默认开启值域开关，可选single，multiple
+//            hoverLink:false, // 	是否启用地图hover时的联动响应（详情披露）
           //  color:['red','#f0ffff'], //值域颜色标识-----------------
-            color:['rgba(0, 0, 0, .8)','rgba(0, 0, 0, 0.08)'],
-            formatter: function(v, v2){  //模板
-                if (v2 < 1000) { return '低于' + v2}
-                else if (v > 1000) { return '高于' + v}
-                else { return '中' }
-            },
+//            color:['rgba(0, 0, 0, .8)','rgba(0, 0, 0, 0.08)'],
+//            formatter: function(v, v2){  //模板
+//                if (v2 < 1000) { return '低于' + v2}
+//                else if (v > 1000) { return '高于' + v}
+//                else { return '中' }
+//            },
 //文字 样式
-            textStyle:{
-                color: 'red',
-                decoration:'none', //修饰，仅对tooltip.textStyle生效
-                align:'left',// 	水平对齐方式，可选为：'left' | 'right' | 'center'
-                baseline:'top',// 	垂直对齐方式，可选为：'top' | 'bottom' | 'middle'
-                fontFamily:'Arial', //  字体系列 	'Arial, Verdana, sans-serif'
-                fontSize:12,
-                fontStyle:'normal', // 	样式，可选为：'normal' | 'italic' | 'oblique'
-                fontWeight:'bold' //normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 |... | 900
-            },
+//            textStyle:{
+//                color: 'red',
+//                decoration:'none', //修饰，仅对tooltip.textStyle生效
+//                align:'left',// 	水平对齐方式，可选为：'left' | 'right' | 'center'
+//                baseline:'top',// 	垂直对齐方式，可选为：'top' | 'bottom' | 'middle'
+//                fontFamily:'Arial', //  字体系列 	'Arial, Verdana, sans-serif'
+//                fontSize:12,
+//                fontStyle:'normal', // 	样式，可选为：'normal' | 'italic' | 'oblique'
+//                fontWeight:'bold' //normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 |... | 900
+//            },
 
 
 
