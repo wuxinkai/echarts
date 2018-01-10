@@ -15,7 +15,7 @@
 
     option = {
         title : {
-            text: 'iphone销量',
+            text: 'iphone销量 ',
             subtext: '纯属虚构',
             x:'center'
         },
@@ -68,9 +68,10 @@
                 'china': true
             }
         },
-            //涩v思
+
         series : [
             {
+                center: ['10%', '10%'],
                 name: 'iphone3',
                 type: 'map',
                 selectedMode:'single', //单选或multiple多选、
@@ -87,7 +88,7 @@
                 mapValuePrecision:2,//保留两位小数
                 showLegendSymbol:true, // 	显示图例颜色标识（系列标识的小圆点），存在legend时生效
 //                textFixed:{ //地区的名称文本位置修正，数值单位为px，正值为左下偏移，负值为右上偏移
-//                    河北:''
+//                    河北:'202'
 //                },
                 nameMap:{'China' : '中国'},//自定义地区的名称映射
                 geoCoord:{'Islands':[113.95, 22.26]}, //通过经纬度定义位置，

@@ -1,0 +1,109 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <title>process</title>
+    <style>
+
+
+        .xui-wrapper {
+            margin:0 auto;
+            width:100%;
+        }
+        .xui-myPromption-wrapper .xui-returnCommission .xui-process {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 28px 0 12px;
+            width: 76%;
+        }
+        .xui-myPromption-wrapper .xui-process .xui-icon-flag {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            width: 42px;
+            height: 35px;
+            background-size: 11px;
+            z-index: 100;
+            background: url("tool_03.png") no-repeat;
+        }
+
+        .xui-myPromption-wrapper .xui-process .xui-process-active {
+            float: left;
+            position: absolute;
+            top: 28px;
+            left: 0;
+            width: 0;
+            height: 14px;
+            border: 1px solid #4dafe2;
+            background-color: #008cd5;
+            background-size: 20px 38px;
+
+        }
+        .xui-process-active:after{
+            content:"";
+            width:0;
+            height:0;
+            border-width:8px;
+            border-style:solid;
+            border-color:transparent transparent #008CD5 #008CD5 ;
+            float: right;
+            margin-top: -1px;
+            margin-right: -16px;
+        }
+
+    </style>
+</head>
+<body>
+<ul>
+    <li>
+        <div class="xui-wrapper xui-myPromption-wrapper">
+            <div class="xui-mainContain pt10 bg_fff">
+                <div class="xui-returnCommission">
+                    <div class="xui-process">
+                        <!--<i id="icon-flag" class="xui-icon-flag"></i>-->
+                        <i  class="icon-flag xui-icon-flag"></i>
+                        <div  class="process-bar xui-process-active"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </li>
+    <li>
+        <div class="xui-wrapper xui-myPromption-wrapper">
+            <div class="xui-mainContain pt10 bg_fff">
+                <div class="xui-returnCommission">
+                    <div class="xui-process">
+                        <!--<i id="icon-flag" class="xui-icon-flag"></i>-->
+                        <i  class="icon-flag xui-icon-flag"></i>
+                        <div  class="process-bar xui-process-active"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </li>
+</ul>
+
+<script>
+    (function (hasGet, totalGet) {
+        var flag = document.getElementsByClassName('icon-flag')[0],
+            processBar = document.getElementsByClassName('process-bar')[0],
+            widthPercentage = Math.round(hasGet/totalGet*100);
+        if (widthPercentage >= 100) {
+            widthPercentage = 100;
+        }
+        flag.style.left = (widthPercentage+3) + '%';
+        processBar.style.width = widthPercentage + '%';
+        if (widthPercentage == 0) {
+            processBar.style.borderStyle = 'none';
+        }
+    })(20, 100);
+
+
+
+
+
+</script>
+</body>
+</html>

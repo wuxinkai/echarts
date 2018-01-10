@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>安徽省公务用车监督管理平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script  src="http://echarts.baidu.com/echarts2/doc/asset/js/jquery.min.js"></script>
+
+</head>
+<body class="jd">
+<style>
+    .main-table tr td{padding:3px;}
+    .main-table .red{color:red;}
+</style>
+<div class="y-span10 y-last">
+    <div class="table">
+        <div class="bj_nav y-clearfix">
+            <div style="border:1px solid #ddd;height:750px;">
+                <div id="main" style="height:700px;width:50%;margin:0 15px;float:left;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    require.config({
+        paths: {
+            echarts: '../echarts/build/dist'
+        }
+    });
+
+    // 使用
+    require(
+        [
+            'echarts',
+            'echarts/chart/map'
+        ],
+        function (ec) {
+            require('echarts/util/mapData/params').params.anhui = {
+
+                getGeoJson: function (callback) {
+                    $.ajax({
+                        //请求方式为get
+                        type:"GET",
+                        //json文件位置
+                        url:"../anhui.json",
+                        //返回数据格式为json
+                        dataType: "json",
+
+                        success: function(data){
+                            callback(require('echarts/util/mapData/params').decode(data));
+                        }
+                    });
+
+                }
+            }
+            var myChart = ec.init(document.getElementById('main'));
+            var ecConfig = require('echarts/config');
+            var zrEvent = require('zrender/tool/event');
+            var curIndx = 0;
+            var mapType =["安徽"];
+
+
+            myChart.on(ecConfig.EVENT.MAP_SELECTED, function (param){});
+            option = {
+
+                tooltip : {
+                    trigger: 'item',
+                    //formatter:'dede{b}'
+                    formatter:function(param){
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    x:'',
+                    data:[' ']
+                },
+                dataRange: {
+                    min: 0,
+                    max: 1000,
+                    color:['#4e95c3','#ced0cf'],
+                    text:['高','低'],           // 文本，默认为数值文本
+                    calculable : true,
+
+                },
+                series : [
+                    {name: '',
+                        type: 'map',
+                        mapType: 'anhui',
+                        selectedMode : false,
+                        itemStyle:{
+                            normal:{label:{show:true},
+                                borderColor:'rgba(255,255,255,255)',
+                                borderWidth:2
+                            },
+                            emphasis:{label:{show:true}}
+                        },
+                        data:[
+                            { name: '六安市', value: Math.round(Math.random() * 500) },
+                            { name: '安庆市', value: Math.round(Math.random() * 500) },
+                            { name: '滁州市', value: Math.round(Math.random() * 500) },
+                            { name: '宣城市', value: Math.round(Math.random() * 500) },
+                            { name: '阜阳市', value: Math.round(Math.random() * 500) },
+                            { name: '宿州市', value: Math.round(Math.random() * 500) },
+                            { name: '黄山市', value: Math.round(Math.random() * 500) },
+                            { name: '亳州市', value: Math.round(Math.random() * 500) },
+                            { name: '池州市', value: Math.round(Math.random() * 500) },
+                            { name: '合肥市', value: Math.round(Math.random() * 500) },
+                            { name: '蚌埠市', value: Math.round(Math.random() * 500) },
+                            { name: '芜湖市', value: Math.round(Math.random() * 500) },
+                            { name: '淮北市', value: Math.round(Math.random() * 500) },
+                            { name: '淮南市', value: Math.round(Math.random() * 500) },
+                            { name: '马鞍山市', value: Math.round(Math.random() * 500) },
+                            { name: '铜陵市', value: Math.round(Math.random() * 500) }
+                        ],
+                        geoCoord: {
+                            '合肥市': [117.22,31.79],
+                            '蚌埠市': [117.33,33.03],
+                            '芜湖市': [118.34,31.05],
+                            '淮南市': [116.78,32.62],
+                            '铜陵市': [117.82,30.93],
+                            '宿州市': [117.29,33.64],
+                            '宣城市': [118.95,30.64],
+                            '亳州市': [115.76,33.80],
+                            '池州市': [117.47,30.37],
+                            '马鞍山市': [118.53,31.50],
+                            '淮北市': [116.70,33.78],
+                            '安庆市': [116.55,30.52],
+                            '黄山市': [118.01,29.98],
+                            '滁州市': [118.32,32.27],
+                            '阜阳市': [115.82,32.85],
+                            '六安市': [116.22,31.92]
+                        },
+                        markPoint : {
+                            symbol:'emptyCircle',
+                            symbolSize: 5, //大小
+                            itemStyle: { //文字
+                                normal: {
+                                    borderColor:['#f34010'],
+                                    borderWidth: 20,            // 标注边线线宽，单位px，默认为1
+                                    label: {
+                                        show: true
+                                    }
+                                },
+//                                emphasis: { //鼠标画上去的效果
+//                                    borderColor: '#bc2e08',
+//                                    borderWidth: 15,
+//                                    label: {
+//                                        show: true
+//                                    }
+//                                }
+                            },
+//                            effect : {
+//                                show: true,
+//                                shadowBlur : 0,
+//                                loop: true
+//                            },
+                            data : [
+                                {name:'合肥市',value:95},
+                                {name:'蚌埠市',value:25},
+                                {name:'芜湖市',value:93},
+                                {name:'淮南市',value:94},
+                                {name:'铜陵市',value:92}
+                            ]
+                        }
+
+                    }
+                ]
+            }
+            myChart.setOption(option);
+        }
+    );
+</script>
+</body>
+</html>

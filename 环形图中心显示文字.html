@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/echarts.js"></script>
+</head>
+<body>
+<div id="section7" class="p60">
+    <div class="container">
+        <p class="text-center text-title">CMA核心内容</p>
+        <div class="col-md-6 text-center pt60">
+            <div id="pie1" style="width: 100%;height:400px;"></div>
+        </div>
+        <div class="col-md-6 text-center pt60">
+            <div id="pie2" style="width: 100%;height:400px;"></div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('pie1'));
+    var myChart2 = echarts.init(document.getElementById('pie2'));
+
+    option1 = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            show: false,
+            orient: 'vertical',
+            x: 'left',
+            data: ['20%-成本管理', '20%-绩效管理', '15%-对外财务-报告决策', '15%-内部控制', '30%-规划预算-编制与预测']
+        },
+        graphic:{
+            type:'text',
+            left:'center',
+            top:'center',
+            style:{
+                text:'内容没有显示',
+                textAlign:'center',
+                fill:'#000',
+                width:30,
+                height:30
+            }
+        },
+        series: [
+            {
+                name:'访问来源',
+                type: 'pie',
+                radius: ['35%', '65%'],
+                itemStyle: {
+                    normal:{
+                        label:{
+                            show:true,
+                            textStyle:{color:'#3c4858',fontSize:"18"},
+                            formatter:function(val){   //让series 中的文字进行换行
+                                return val.name.split("-").join("\n");}
+                        },
+                        title:{
+                            text:'aaaa'
+                        },
+                        labelLine:{
+                            show:true,
+                            lineStyle:{color:'#3c4858'}
+                        }
+                    },
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                        textColor:'#000'
+                    }
+                },
+                data: [
+                    {value: 20, name: '20%-成本管理'},
+                    {value: 20, name: '20%-绩效管理'},
+                    {value: 15, name: '15%-对外财务-报告决策'},
+                    {value: 15, name: '15%-内部控制'},
+                    {value: 30, name: '30%-规划预算-编制与预测'}
+                ]
+            }
+        ],
+        color: ['rgb(61,171,232)','rgb(95,193,215)','rgb(146,198,96)','rgb(59,175,134)','rgb(53,128,198)']
+    };
+    myChart1.setOption(option1);
+</script>

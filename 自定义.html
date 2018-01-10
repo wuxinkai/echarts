@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://cdn.bootcss.com/require.js/2.1.12/require.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <style type="text/css">
+        #test{
+            /*background:url("img/login.jpg");*/
+        }
+    </style>
+</head>
+<body>
+<div id="test">
+    <div id="main" style="height:500px;border:1px solid #e4393c"></div>
+
+</div>
+<script type="text/javascript">
+    require.config({
+        paths : {
+            echarts : 'echarts/echarts',
+            'ehcarts/chart/map' : 'chart/map'
+        }
+    });
+
+    require(
+        [
+            'echarts',
+            'echarts/chart/map'
+        ],
+        function(ec){
+            require('echarts/util/mapData/params').params.ship  = {
+                getGeoJson : function(callback){
+                    $.ajax({
+                        url : "echarts/echarts/bg-test.svg",
+                        dataType : "xml",
+                        success : function(xml){
+                            callback(xml);
+                        }
+                    });
+                }
+            }
+            var myChart = ec.init(document.getElementById('main'));
+            var option = {
+                title : {
+                    text : '测试'
+                },
+                tooltip : {
+                    trigger : 'item',
+                    formatter : '{b}'
+                },
+                series : [
+                    {
+                        name: '嘿嘿',
+                        type: 'map',
+                        mapType: 'ship',
+                        roam:true,
+                        itemStyle:{
+                            normal:{label:{show:true}},
+                            emphasis:{label:{show:true}}
+                        },
+                        data: [],
+                        geoCoord: {
+                            '叮叮': [0, 0],
+                            '小兑儿': [100, 45],
+                            '胡瑶': [195, 29],
+                            '祖明': [195, 44],
+                            '林峰': [195, 60],
+                            '安晨': [210, 44],
+                            '功': [210, 60],
+                            '立新': [144, 59],
+                            '诗才': [195, 71],
+                            '黄競': [210, 59],
+                            '浪宇': [150, 55],
+                            '晓青': [210, 71],
+                            '毅楠': [222, 59],
+                            '朝霞': [222, 71],
+                            '武琦': [231, 71],
+                            '严萍': [231, 46],
+                            '绍波': [231, 59],
+                            '开放': [488, 43],
+                            '兵兵': [488, 60],
+                            '孟珂': [522, 43],
+                            '辉耀': [522, 60],
+                            '佳璐': [488, 23],
+                            '新乐': [522, 23],
+                            '大佛': [165, 29],
+                            '周玉': [165, 44],
+                            '令君': [165, 60],
+                            '佳璐': [165, 71],
+                            'erik': [222, 44],
+                            '爽哥': [240, 60],
+                            '雷哥': [240, 44],
+                            '坤哥': [176, 59],
+                            '刚哥': [176, 71],
+                            '高经': [545, 54],
+                            '邱华': [468, 23],
+                            '饥渴难耐的辉辉': [473, 40],
+                            '大发': [500, 40],
+                            '淼童': [473, 60],
+                            '亚江': [500, 60],
+                            '莉姐': [530, 70],
+                            '红启': [570, 54],
+                            '五福降中天': [373, 173],
+                            'csfe': [500, 54],
+                            '得胜令': [253, 179],
+                            '西湖春': [496, 179],
+                            '望江南': [72, 203],
+                            '庆千秋': [86, 203],
+                            '过江龙': [289, 32],
+                            '天下乐': [289, 50],
+                            '万年欢': [687, 24],
+                            '浣溪沙': [637, 203],
+                            '清平乐': [649, 203],
+                            '四和春': [663, 203],
+                            '杏花天': [676, 203]
+                        },
+                        markPoint : {
+                            symbol : 'image://img/logo-blue.png',
+                            symbolSize : 10,
+                            effect : {
+                                show : true
+                            },
+                            data : [
+                                {name: '叮叮'},
+                                {name: '小兑儿'},
+                                {name: '胡瑶'},
+                                {name: '高经'},
+                                {name: 'erik'},
+                                {name: '祖明'},
+                                {name: '林峰'},
+                                {name: '坤哥'},
+                                {name: '刚哥'},
+                                {name: '爽哥'},
+                                {name: '雷哥'},
+                                {name: '邱华'},
+                                {name: '淼童'},
+                                {name: '亚江'},
+                                {name: '莉姐'},
+                                {name: '大发'},
+                                {name: '饥渴难耐的辉辉'},
+                                {name: '红启'},
+                                {name: '安晨'},
+                                {name: '功'},
+                                {name: '立新'},
+                                {name: '诗才'},
+                                {name: '黄競'},
+                                {name: '晓青'},
+                                {name: '毅楠'},
+                                {name: '浪宇'},
+                                {name: '朝霞'},
+                                {name: '严萍'},
+                                {name: '武琦'},
+                                {name: '绍波'},
+                                {name: '开放'},
+                                {name: '兵兵'},
+                                {name: '孟珂'},
+                                {name: '辉耀'},
+                                {name: '佳璐'},
+                                {name: '新乐'},
+                                {name: '周玉'},
+                                {name: '令君'},
+                                {name: '佳璐'}
+                            ]
+                        },
+                        markLine : {
+                            smooth:true,
+                            effect : {
+                                show: true,
+                                scaleSize: 1,
+                                period: 20,
+                                color: '#fff',
+                                shadowBlur: 5
+                            },
+                            symbol: ['none'],
+                            itemStyle : {
+                                normal: {
+                                    borderWidth:1,
+                                    lineStyle: {
+                                        type: 'solid'
+                                    }
+                                }
+                            },
+                            data : [
+                                [
+                                    {name:'erik'},
+                                    {name:'胡瑶'}
+                                ],
+                                [
+                                    {name:'祖明'},
+                                    {name:'叮叮'}
+                                ],
+                                [
+                                    {name:'祖明'},
+                                    {name:'小兑儿'}
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        name : '信达泰',
+                        type : 'map',
+                        mapType : 'ship',
+                        roam : true,
+                        itemStyle:{
+                            normal:{label:{show:true}},
+                            emphasis:{label:{show:true}}
+                        },
+                        data: [],
+                        geoCoord: {
+                            '孙经理': [100, 245],
+                            '小姜同学': [100, 345]
+                        },
+                        markPoint : {
+                            symbolSize : 10,
+                            symbol : 'image://img/icon.png',
+                            data : [
+                                {name : '孙经理'},
+                                {name : '小姜同学'},
+
+                            ]
+                        }
+                    },
+                    {
+                        name: '高经',
+                        type: 'map',
+                        mapType: 'ship',
+                        roam:true,
+                        symbol: ['none'],
+                        itemStyle:{
+                            normal:{label:{show:true}},
+                            emphasis:{label:{show:true}}
+                        },
+                        data: [],
+                        markLine : {
+                            smooth:true,
+                            effect : {
+                                show: true,
+                                scaleSize: 1,
+                                period: 20,
+                                color: '#fff',
+                                shadowBlur: 5
+                            },
+                            itemStyle : {
+                                normal: {
+                                    borderWidth:1,
+                                    lineStyle: {
+                                        type: 'solid'
+                                    }
+                                }
+                            },
+                            data : [
+                                [
+                                    {name:'高经'},
+                                    {name:'洗手间', geoCoord:[440, 179]}
+                                ],
+                                [
+                                    {name:'高经'},
+                                    {name:'洗手间', geoCoord:[637, 53]}
+                                ],
+                                [
+                                    {name:'高经'},
+                                    {name:'洗手间', geoCoord:[637, 179]}
+                                ],
+                                [
+                                    {name:'高经'},
+                                    {name:'洗手间', geoCoord:[307, 179]}
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            };
+            myChart.setOption(option);
+        }
+    )
+</script>
+<script type="text/javascript">
+    $("#sel select").change(function(){
+        selectChange($(this).val());
+    })
+
+</script>
+</body>
+</html>
