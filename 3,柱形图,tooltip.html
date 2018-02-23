@@ -93,12 +93,20 @@
                     normal: {  //默认样式
                         barBorderWidth:3,  //3px的边框
                         barBorderColor:'#000', //边框颜色
-                        barBorderRadius:10, //把柱子设置成圆角
+                        barBorderRadius:20, //把柱子设置成圆角
+                        color: function(params) { //设置柱状图颜色
+                            //首先定义一个数组
+                            var colorList = [
+                                '#C33531','#EFE42A','#64BD3D','#EE9201','#29AAE3',
+                                '#B74AE5','#0AAF9F','#E89589','#E89789','#E86589','#E29789','#E16589'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
                      },
                 },
                 barGap:'30%' , //柱子和柱子的间距，默认是30% ，支持负数，两个柱子跌在一起，
                 barCategoryGap:'20%', //类目间柱形距离 默认为类目间距的20%，
-                barWidth:10,  //柱子的粗细
+                barWidth:15,  //柱子的粗细
                 barMaxWidth:50, //在数据比较少的情况下，柱子会非常宽，我们可以设置最大宽度
                 barMinHeight:50, //数值非常小，会看不清，所以设置最小高度，
 
@@ -133,7 +141,14 @@
                     data : [
                         {type : 'average', name : '平均值'}
                     ]
-                }
+                },
+                itemStyle:{
+                    normal: {  //默认样式
+
+                        color:'pink'
+
+                    },
+                },
             }
         ]
     };
