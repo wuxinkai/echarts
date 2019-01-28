@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>微博签到数据点亮中国</title>
+		<style type="text/css">
+			body{
+				margin: 0;
+				padding: 0;
+				background: rgb(30,29,145);
+			}
+			.fade-show {
+				-webkit-animation: fade 2s forwards infinite;
+				animation: fade 2s forwards infinite;
+			}
+			
+			@keyframes fade {
+				0% {
+					opacity: 0.5;
+				}
+				30% {
+					opacity: 1;
+				}
+				70% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0.5;
+				}
+			}
+			
+			.box {
+				width: 100%;
+				position: relative;
+				
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<div id="main1" style="width:100%; height: 700px; position: absolute;top: 0;left: 0;z-index: 1;"></div>
+			<div id="main2" class="fade-show" style="width:100%; height: 700px; position: absolute;top: 0;left: 0;z-index: 2;"></div>
+		</div>
+		<script src="./jquery.js"></script>
+		<script src="./echarts.js"></script>
+		<script src="./echartsgl.js"></script>
+		<script src="./china.js"></script>
+		<script src="data.js"></script>
+
+		<script>
+		</script>
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+			var myChart1 = echarts.init(document.getElementById('main1'));
+			var myChart2 = echarts.init(document.getElementById('main2'));
+
+			var mapOption = {
+				tooltip: {
+					show: false,
+					trigger: 'item',
+					formatter: function(params) {
+						return params.name
+					}
+				},
+				legend: {
+					orient: 'vertical',
+					y: 'bottom',
+					x: 'right',
+					data: ['pm2.5'],
+					textStyle: {
+						color: '#fff'
+					}
+				},
+				geo: {
+					map: 'china',
+					//roam: true,     //是否可以放大缩小
+					zoom: 1,
+					label: {
+						normal: {
+							show: false,
+							textStyle: {
+								color: '#fff'
+							},
+						},
+						emphasis: {
+							show: false,
+							textStyle: {
+								color: '#fff', //提示文字颜色
+								fontSize: "30", //提示文字大小
+							},
+						},
+					},
+					itemStyle: {
+						normal: {
+							//								areaColor: 'rgba(50,60,72,0.5)',
+							areaColor: 'rgba(0,0,0,0.1)',
+							borderColor: '#3a9cbd',
+							borderWidth: "1"
+						},
+						emphasis: {
+							show: false,
+							areaColor: 'rgba(255,255,255,0)',
+							borderWidth: 0
+						}
+					}
+				},
+				series: [{
+					name: '',
+					//				type: 'effectScatter',
+					type: 'scatter',
+					coordinateSystem: 'geo',
+					showEffectOn: 'render',
+					rippleEffect: {
+						period: "5",
+						scale: "7",
+						brushType: 'stroke',
+						//brushType: 'fill',
+					},
+					data: [],
+					symbolSize: 3,
+					itemStyle: {
+						normal: {
+							shadowBlur: 5, //数据点阴影大小
+							shadowColor: '#fff', //数据点阴影颜色
+							color: 'rgba(47, 245, 252, 0.8)' // 数据点颜色
+						}
+					}
+				}, {
+					name: '',
+					//				type: 'effectScatter',
+					type: 'scatter',
+					coordinateSystem: 'geo',
+					showEffectOn: 'render',
+					rippleEffect: {
+						period: "5",
+						scale: "7",
+						brushType: 'stroke',
+						//brushType: 'fill',
+					},
+					data: [{
+						"value": ["123.50", "26.03", "1"]
+					}, {
+						"value": ["123.0", "25.93", "1"]
+					}, {
+						"value": ["122.8", "25.73", "1"]
+					}, {
+						"value": ["121.4", "22.33", "1"]
+					}, {
+						"value": ["119.55", "23.28", "1"]
+					}],
+					symbolSize: 2,
+					itemStyle: {
+						normal: {
+							color: '#3a9cbd' // 数据点颜色
+						}
+					}
+				}]
+			};
+
+			myChart1.setOption(mapOption);
+			mapOption.backgroundColor = "";
+			mapOption.geo.itemStyle.normal = {};
+			mapOption.geo.itemStyle.normal.borderColor = "rgba(255,255,255,0)";
+			mapOption.geo.itemStyle.normal.areaColor = "rgba(255,255,255,0)";
+			var tdata=[];
+			for(var k=0;k<data.length;k++){
+				for(var j=0;j<5;j++){
+					tdata.push(data[k])
+				}
+			}
+			mapOption.series[0].data = tdata;
+			myChart2.setOption(mapOption);
+			//}, 2000)
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>微博签到数据点亮中国</title>
+	</head>
+
+	<body>
+
+		<div id="main" style="width:1100px; height: 700px; border: 1px solid #000;"></div>
+	
+		<script src="./jquery.js"></script>
+		<script src="./echarts.js"></script>
+		<script src="./echartsgl.js"></script>
+		<script src="./china.js"></script>
+
+		
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('main'));
+			myChart.showLoading();
+			$.getJSON('./weibo.json', function(weiboData) {
+				myChart.hideLoading();
+				weiboData = weiboData.map(function(serieData, idx) {
+					var px = serieData[0] / 1000;
+					var py = serieData[1] / 1000;
+					var res = [
+						[px, py]
+					];
+
+					for(var i = 2; i < serieData.length; i += 2) {
+						var dx = serieData[i] / 1000;
+						var dy = serieData[i + 1] / 1000;
+						var x = px + dx;
+						var y = py + dy;
+						res.push([x.toFixed(2), y.toFixed(2), 1]);
+
+						px = x;
+						py = y;
+					}
+					return res;
+				});
+				console.log(weiboData)
+				myChart.setOption(option = {
+					backgroundColor: 'rgb(51,51,51)',
+					title: {
+						text: '微博签到数据点亮中国',
+						subtext: 'From ThinkGIS',
+						sublink: 'http://www.thinkgis.cn/public/sina',
+						left: 'center',
+						top: 'top',
+						textStyle: {
+							color: '#fff'
+						}
+					},
+					tooltip: {},
+					legend: {
+						left: 'left',
+						data: ['强', '中', '弱'],
+						textStyle: {
+							color: '#ccc'
+						}
+					},
+					geo: {
+						map: 'china',
+						roam: true,
+						label: {
+							emphasis: {
+								show: false
+							}
+						},
+						itemStyle: {
+							normal: {
+								areaColor: '#323c48',
+								borderColor: '#00BFFF',
+								borderWidth:"1.5"
+						
+							},
+							emphasis: {
+								areaColor: '#2a333d'
+							}
+						}
+					},
+					series: [{
+						name: '弱',
+						type: 'scatterGL',
+						coordinateSystem: 'geo',
+						symbolSize: 1,
+						itemStyle: {
+							shadowBlur: 2,
+							shadowColor: 'rgba(37, 140, 249, 0.8)',
+							color: 'rgba(37, 140, 249, 0.8)'
+						},
+						data: weiboData[0]
+					}, {
+						name: '中',
+						type: 'scatterGL',
+						coordinateSystem: 'geo',
+						symbolSize: 1,
+						itemStyle: {
+							shadowBlur: 2,
+							shadowColor: 'rgba(14, 241, 242, 0.8)',
+							color: 'rgba(14, 241, 242, 0.8)'
+						},
+						data: weiboData[1]
+					}, {
+						name: '强',
+						type: 'scatterGL',
+						coordinateSystem: 'geo',
+						symbolSize: 1,
+						itemStyle: {
+							shadowBlur: 2,
+							shadowColor: 'rgba(255, 255, 255, 0.8)',
+							color: 'rgba(255, 255, 255, 0.8)'
+						},
+						data: weiboData[2]
+					}]
+				});
+			});
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>微博签到数据点亮中国</title>
+		<style type="text/css">
+			.fade-show {
+				-webkit-animation: fade 2s forwards infinite;
+				animation: fade 2s forwards infinite;
+			}
+			
+			@keyframes fade {
+				0% {
+					opacity: 0.5;
+				}
+				30% {
+					opacity: 1;
+				}
+				70% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0.5;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="main1" style="width:1100px; height: 700px; border: 1px solid #000;position: absolute;top: 0;left: 0;z-index: 1;"></div>
+		<div id="main2" class="fade-show" style="width:1100px; height: 700px; border: 1px solid #000;position: absolute;top: 0;left: 0;z-index: 2;"></div>
+
+		<script src="./jquery.js"></script>
+		<script src="./echarts.js"></script>
+		<script src="./echartsgl.js"></script>
+		<script src="./china.js"></script>
+		<script src="data.js"></script>
+
+		<script>
+		</script>
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+			var myChart1 = echarts.init(document.getElementById('main1'));
+			var myChart2 = echarts.init(document.getElementById('main2'));
+
+			option = {
+				backgroundColor: "rgb(21,78,144)",
+				title: {
+					//      text: '全国主要城市空气质量',
+					//      subtext: 'data from PM25.in',
+					//      sublink: 'http://www.pm25.in',
+					//      left: 'center',
+					//      textStyle: {
+					//          color: '#fff'
+					//      }
+				},
+				tooltip: {
+					trigger: 'item',
+					formatter: function(params) {
+						return params.name + '<br/>' +
+							params.seriesName + ": " + params.value[2]
+					}
+				},
+				legend: {
+					orient: 'vertical',
+					y: 'bottom',
+					x: 'right',
+					data: ['pm2.5'],
+					textStyle: {
+						color: '#fff'
+					}
+				},
+				geo: {
+					map: 'china',
+					//roam: true,     //是否可以放大缩小
+					zoom: 1,
+					label: {
+						normal: {
+							show: false,
+							textStyle: {
+								color: '#fff'
+							},
+						},
+						emphasis: {
+							show: false,
+							textStyle: {
+								color: '#fff', //提示文字颜色
+								fontSize: "30", //提示文字大小
+							},
+						},
+					},
+					itemStyle: {
+						normal: {
+							borderColor: 'rgba(147, 235, 248, 1)',
+							borderWidth: 1,
+							areaColor: {
+								type: 'radial',
+								x: 0.5,
+								y: 0.5,
+								r: 0.8,
+								colorStops: [{
+									offset: 0,
+									color: 'rgba(147, 235, 248, 0.1)' // 0% 处的颜色
+								}, {
+									offset: 1,
+									color: 'rgba(147, 235, 248, .2)' // 100% 处的颜色
+								}],
+								globalCoord: false // 缺省为 false
+							},
+							shadowColor: 'rgba(128, 217, 248, 1)',
+							// shadowColor: 'rgba(255, 255, 255, 1)',
+							shadowOffsetX: -2,
+							shadowOffsetY: 2,
+							shadowBlur: 10
+						},
+						emphasis: {
+							areaColor: '#389BB7',
+							borderWidth: 0
+						}
+					}
+				},
+				series: [{
+					name: '点亮数量',
+					type: 'effectScatter',
+
+					coordinateSystem: 'geo',
+					showEffectOn: 'render',
+					rippleEffect: {
+						period: "5",
+						scale: "7",
+						brushType: 'stroke',
+						//brushType: 'fill',
+					},
+					data: [],
+					symbolSize: 2,
+					itemStyle: {
+						normal: {
+							shadowBlur: 10, //数据点阴影大小
+							shadowColor: '#fff', //数据点阴影颜色
+							color: 'rgba(14, 241, 242, 0.8)' //数据点颜色
+						}
+					}
+				}]
+			};
+
+			myChart1.setOption(option);
+			option.backgroundColor = "";
+			option.geo.itemStyle.normal = {};
+			option.geo.itemStyle.normal.borderColor = "rgba(255,255,255,0)";
+			option.geo.itemStyle.normal.areaColor = "rgba(255,255,255,0)";
+			option.series[0].data = data;
+			myChart2.setOption(option);
+			//}, 2000)
+		</script>
+
+	</body>
+
+</html>

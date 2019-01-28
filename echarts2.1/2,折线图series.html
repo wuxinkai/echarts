@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/echarts.js"></script>
+</head>
+<body>
+<div id="main" style="height:500px"></div>
+</body>
+</html>
+<script type="text/javascript">
+    //(1)主题
+    //(2)title  标题，大标题和副标题两个，
+    //(3)通用内容
+    //(4)折线图特征
+    //（5）legend图例，
+    var myChart = echarts.init(document.getElementById('main'),'infographic'); //infographic,macarons 是默认主题
+    option = {
+//（2）title 标题
+        title : {
+            text: '未来一周\n气温变化',  //  \n是换行
+            textStyle:{
+                fontSize: 18,
+                fontWeight: 'bolder',
+                color: 'red'
+            },
+            subtext: '纯属虚构',
+            subtextStyle:{
+              color:'blue',
+                fontSize: 14,
+            },
+            x:'center',  //定义title的位置，也可以是数值，
+            y:'bottom',
+            textAlign:'left', //文本对齐方式，
+            borderWidth:1,  //1px边框
+            padding:10,   //也可以是数组[10,5,12,21]
+        },
+        //气泡
+        tooltip : {
+            trigger: 'axis'  //	触发类型，默认数据触发，见下图，可选为：'item' | 'axis'
+        },
+//（5）legend图例，
+        color:['red','blue'], //设置legend图标颜色
+        legend: {
+            show:true,//显示隐藏
+            data:['最高气温',
+                {
+                    name:'最低气温', //单独控制的
+                    textStyle:{
+                        color: 'red'
+                    }
+                }
+            ],
+            formatter:'{name}--模板引入',  //个性化设置
+            orient:'vertical', //默认是horizontal   横向显示 或者是竖向显示
+            x:'left', //位置
+            y:'top',
+            backgroundColor:'pink', //背景色
+            borderColor:'#000',  //边框色
+            borderWidth:2,//边框宽
+            itemGap:30, //间距
+            itemWidth:20, //图例图形宽度
+            itemHeight:20,
+            textStyle:{
+                color: 'blue'
+            }
+        },
+        //工具箱
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true, //是否可以拖拽
+        xAxis : [
+            {
+                type : 'category',
+                // boundaryGap : false,
+                data : ['周一','周二','周三','周四','周五','周六','周日']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                // axisLabel : {
+                //     formatter: '{value} °C'
+                // }
+            }
+        ],
+        series : [ //对数据的设置
+            {
+                name:'最高气温', //名字  该值将被legend.data索引相关   气泡设置
+                type:'line',  //类型
+                symbol:'emptyTriangle', //节点的样式支持八种circle，rectangle' | 'triangle' | 'diamond' |'emptyCircle' | 'emptyRectangle' | 'emptyTriangle' | 'emptyDiamond'， 五种新图像'heart'（心形）、'droplet'（水滴）、'pin'（标注）、'arrow'（箭头）和'star'（五角星）
+              //  symbol: 'image://http://www.228.com.cn/integral/',支持网络图片
+                symbolSize:10,  //节点大小
+                symbolRotate:15,  //节点旋转
+                showAllSymbol:true, //文字放不下就会被隐藏，true就是不隐藏；
+                smooth:true,  //是否应用平滑曲线，默认是没有平滑曲线的 ，平滑不支持虚线
+                dataFilter:'nearst',  //ECharts 会在折线图的数据数量大于实际显示的像素宽度（高度）的时候会启用优化，对显示在一个像素宽度内的数据做筛选，该选项是指明数据筛选的策略。可选 'nearest', 'min', 'max', 'average'。或者是使用自定义的筛选函数
+                legendHoverLink:true, //图标和图例做联动的响应，false就是不响应    	是否启用图例（legend）hover时的联动响应（高亮显示）
+                data:[11, 11, '3', 13, 19,{
+                    value:'13',
+                    symbolSize:20, //单个的大小
+                    symbol:'emptyCircle',  //单独设置摸一个的样式  'circle' | 'rectangle' | 'triangle' | 'diamond' |'emptyCircle' | 'emptyRectangle' | 'emptyTriangle' | 'emptyDiamond'
+                    tooltip:{},
+                }, 10], //如果出现空数据折现断掉了
+                clickable:true, //图形是否可以点击，
+                itemStyle:{ //图形样式 ，可设置图表内图形的默认样式和强调样式（悬浮时样式）：
+                    normal: {  //默认样式
+                    color:"pink",  //主线条变成了粉色，
+                    lineStyle:{
+                        color:"red", //线变红色，气泡是粉色
+                        width:3,
+                    },
+//                    areaStyle:{  //把折线图变成面积图
+//                        color:'#FFC1C1'
+//                    },
+                    borderColor:"blue", //拐点的颜色
+                    borderWidth:10, //拐点 大小
+                    label:{
+                        show:true, //把点上的内容显示出来，
+                        position:'bottom', //数值在线的底部显示，
+//                        formatter:'{a}-{b}-{c}',  可以显示气温 ，周几 ，多少度，
+
+                        formatter:'{b}:{c}',  //
+                        textStyle:{
+                            color:"#CD00CD", //文字颜色
+//                            fontSize:20,
+                        }
+                    }
+                },
+                emphasis: {  //强调样式  ，鼠标画上去才出效果，
+//                    label:{
+//                        show:true, //把点上的内容显示出来，
+//                        position:'bottom', //数值在线的底部显示，
+////                        formatter:'{a}-{b}-{c}',  可以显示气温 ，周几 ，多少度，
+//
+//                        formatter:'{b}:{c}',  //
+//                        textStyle:{
+//                            color:"#CD00CD" //文字颜色
+//                        }
+//                    }
+            }
+                },
+                //数据标注   设置标注样式的
+
+                markPoint : {  //标记点  系列中的数据标注内容
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : { //系列中的数据标线内容
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'最低气温',
+                type:'line',
+                data:[1, -2, 2, 5, 3, 2, 0],
+                markPoint : {
+                    data : [
+                        {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+    myChart.setOption(option);
+    window.onresize = myChart.resize;
+</script>
